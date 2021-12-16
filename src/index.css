@@ -2,7 +2,19 @@ body {
   height: 99vh;
 }
 
+add-task {
+  grid-area: addtask;
+  background-color: cadetblue;
+}
+
+
 div {
   height: 100%;
   display: grid;
+  grid-template-rows: 10px auto 1fr 10px;
+  grid-template-areas: 
+    ". .        ."
+    ". addtask  ."
+    ". tasklist ."
+    ". .        .";
 }
