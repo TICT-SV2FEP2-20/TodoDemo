@@ -35,12 +35,17 @@ export class TaskList extends LitElement {
     // listen for task-added emitted by the add-task web component
     const addTaskElement = document.querySelector('add-task');
     addTaskElement.addEventListener('task-added', (e) => this.updateTasks(e));
+
+    // listen for delete events emitted by the task-item within this component.
+    this.addEventListener('task-deleted', (e) => this.updateTasks(e));
   }
 
   disconnectedCallback() {
     // cleanup by removing the listeners
     const addTaskElement = document.querySelector('add-task');
     addTaskElement.removeEventListener('task-added', (e) => this.updateTasks(e));
+
+    this.removeEventListener('task-deleted', (e) => this.updateTasks(e));
 
     super.disconnectedCallback();
   }
@@ -56,8 +61,7 @@ export class TaskList extends LitElement {
     <div>
       ${
         TaskService.store.tasks.map((task) => {
-          return `${task.id} | ${task.task} | ${task.done}`;
-          // return html`<task-item id="${task.id}" task="${task.task}" ?done=${task.done}></task-item>`
+          return html`<task-item id="${task.id}" task="${task.task}" ?done=${task.done}></task-item>`
         })
       }
     </div>

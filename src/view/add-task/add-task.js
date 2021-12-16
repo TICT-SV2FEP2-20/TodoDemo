@@ -60,8 +60,8 @@ export class AddTask extends LitElement {
       this.taskService.addTask(newTask);
 
       // fire an event that a task has been added
-      let event = new CustomEvent('task-added', {bubbles: true, composed: true});
-      this.dispatchEvent(event);
+      let customEvent = new CustomEvent('task-added', {bubbles: true, composed: true});
+      this.dispatchEvent(customEvent);
       
       // clearing the textfield again.
       this.value='';
