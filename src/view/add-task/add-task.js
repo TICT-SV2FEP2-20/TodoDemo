@@ -59,6 +59,10 @@ export class AddTask extends LitElement {
       const newTask = new Task(value, false);
       this.taskService.addTask(newTask);
 
+      // fire an event that a task has been added
+      let event = new CustomEvent('task-added', {bubbles: true, composed: true});
+      this.dispatchEvent(event);
+      
       // clearing the textfield again.
       this.value='';
       this.shadowRoot.querySelector('mwc-textfield').value='';

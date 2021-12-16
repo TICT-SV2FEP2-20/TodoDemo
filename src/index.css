@@ -7,6 +7,10 @@ add-task {
   background-color: cadetblue;
 }
 
+task-list {
+  grid-area: tasklist;
+  background-color: burlywood;
+}
 
 div {
   height: 100%;
