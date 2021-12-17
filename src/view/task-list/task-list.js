@@ -26,7 +26,8 @@ export class TaskList extends LitElement {
 
   constructor() {
     super();
-    this.TaskService = new TaskService();
+    this.taskService = new TaskService();
+    this.tasks = [];
   }
 
   connectedCallback() {
@@ -52,6 +53,7 @@ export class TaskList extends LitElement {
 
   updateTasks(event) {
     // calling a lit function to force the element to be rendered again.
+    this.tasks = this.taskService.getTasks();
     this.requestUpdate();
   }
 
@@ -60,7 +62,7 @@ export class TaskList extends LitElement {
     <h1>Taken</h1>
     <div>
       ${
-        TaskService.store.tasks.map((task) => {
+        this.tasks.map((task) => {
           return html`<task-item id="${task.id}" task="${task.task}" ?done=${task.done}></task-item>`
         })
       }

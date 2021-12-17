@@ -1,56 +1,24 @@
+import { store } from './appService';
+import { addTask as addTodo, 
+         deleteTask as deleteTodo, 
+         updateTask as updateTodo } from './TaskActions';
+
 export class TaskService {
-
-  static store = {
-    tasks: []
-  };
-
   constructor() {}
 
   addTask(task) {
-    return new Promise((resolve) => {
-      
-      const newStore = {
-        tasks: [...TaskService.store.tasks, task]
-      }
-
-      TaskService.store = newStore;
-
-      resolve(TaskService.store);
-    });
+    store.dispatch(addTodo(task));
   }
 
   updateTask(taskId, done) {
-    return new Promise((resolve) => {
-
-      const newStore = {
-        tasks: TaskService.store.tasks.map(
-          (task) => {
-            if (task.id === taskId) {
-              task.done = done;
-            }
-            return task;
-          }
-        )
-      };
-      
-      TaskService.store = newStore;
-      
-      resolve(TaskService.store);
-    });
+    store.dispatch(updateTodo(id, done));
   }
 
   deleteTask(taskId) {
-    return new Promise((resolve) => {
+    store.dispatch(deleteTodo(id));
+  }
 
-      const newStore = {
-        tasks: TaskService.store.tasks.filter(
-          (task) => task.id !== taskId
-        )
-      };
-
-      TaskService.store = newStore;
-      
-      resolve(TaskService.store);
-    });
+  getTasks() {
+    return store.getState().tasks;
   }
 }
