@@ -11,11 +11,11 @@ export class TaskService {
   }
 
   updateTask(taskId, done) {
-    store.dispatch(updateTodo(id, done));
+    store.dispatch(updateTodo(taskId, done));
   }
 
   deleteTask(taskId) {
-    store.dispatch(deleteTodo(id));
+    store.dispatch(deleteTodo(taskId));
   }
 
 }
