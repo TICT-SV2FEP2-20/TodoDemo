@@ -8,14 +8,14 @@ export const TaskReducers = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TASK: 
       return {
-        tasks: [...TaskService.store.tasks, task]
+        tasks: [...state.tasks, action.task]
       };
     case UPDATE_TASK:
       return {
-        tasks: TaskService.store.tasks.map(
+        tasks: state.tasks.map(
           (task) => {
-            if (task.id === taskId) {
-              task.done = done;
+            if (task.id === action.taskId) {
+              task.done = action.done;
             }
             return task;
           }
@@ -23,8 +23,8 @@ export const TaskReducers = (state = initialState, action) => {
       };
     case DELETE_TASK:
       return {
-        tasks: TaskService.store.tasks.filter(
-          (task) => task.id !== taskId
+        tasks: state.tasks.filter(
+          (task) => task.id !== action.taskId
         )
       };
     default: 
