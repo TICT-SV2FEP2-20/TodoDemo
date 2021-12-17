@@ -48,8 +48,6 @@ export class TaskItem extends LitElement {
 
   delete(event) {
     this.taskService.deleteTask(this.id);
-    let customEvent = new CustomEvent('task-deleted', {bubbles: true, composed: true});
-    this.dispatchEvent(customEvent);
   }
 }
 

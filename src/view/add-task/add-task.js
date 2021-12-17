@@ -58,10 +58,6 @@ export class AddTask extends LitElement {
       // the user has entered a value within the textfield
       const newTask = new Task(value, false);
       this.taskService.addTask(newTask);
-
-      // fire an event that a task has been added
-      let customEvent = new CustomEvent('task-added', {bubbles: true, composed: true});
-      this.dispatchEvent(customEvent);
       
       // clearing the textfield again.
       this.value='';

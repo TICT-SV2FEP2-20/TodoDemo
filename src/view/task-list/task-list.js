@@ -1,7 +1,8 @@
-import { LitElement, html, css } from "lit";
-import { TaskService } from '../../service/TaskService';
+import { LitElement, html, css } from 'lit';
+import { connect } from 'pwa-helpers';
+import { store } from '../../service/AppService';
 
-export class TaskList extends LitElement {
+export class TaskList extends connect(store)(LitElement) {
 
   static styles = css`
     :host {
@@ -24,37 +25,20 @@ export class TaskList extends LitElement {
     }
   `;
 
+  static get properties() {
+    return {
+      tasks: { type: Array }
+    }
+  }
+
   constructor() {
     super();
-    this.taskService = new TaskService();
     this.tasks = [];
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-
-    // listen for task-added emitted by the add-task web component
-    const addTaskElement = document.querySelector('add-task');
-    addTaskElement.addEventListener('task-added', (e) => this.updateTasks(e));
-
-    // listen for delete events emitted by the task-item within this component.
-    this.addEventListener('task-deleted', (e) => this.updateTasks(e));
-  }
-
-  disconnectedCallback() {
-    // cleanup by removing the listeners
-    const addTaskElement = document.querySelector('add-task');
-    addTaskElement.removeEventListener('task-added', (e) => this.updateTasks(e));
-
-    this.removeEventListener('task-deleted', (e) => this.updateTasks(e));
-
-    super.disconnectedCallback();
-  }
-
-  updateTasks(event) {
-    // calling a lit function to force the element to be rendered again.
-    this.tasks = this.taskService.getTasks();
-    this.requestUpdate();
+  stateChanged(state) {
+    this.tasks = state.tasks;
+    console.log('state has changed', this.tasks);
   }
 
   render() {
