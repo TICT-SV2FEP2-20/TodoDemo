@@ -37,8 +37,7 @@ export class TaskList extends connect(store)(LitElement) {
   }
 
   stateChanged(state) {
-    this.tasks = state.tasks;
-    console.log('state has changed', this.tasks);
+    this.tasks = state.taskReducer.tasks;
   }
 
   render() {

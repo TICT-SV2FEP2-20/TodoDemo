@@ -1,4 +1,4 @@
-import { store } from './appService';
+import { store } from './AppService';
 import { addTask as addTodo, 
          deleteTask as deleteTodo, 
          updateTask as updateTodo } from './TaskActions';
@@ -18,7 +18,4 @@ export class TaskService {
     store.dispatch(deleteTodo(id));
   }
 
-  getTasks() {
-    return store.getState().tasks;
-  }
 }
