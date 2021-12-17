@@ -1,4 +1,4 @@
-import { store } from './appService';
+import { store } from './AppService';
 import { addTask as addTodo, 
          deleteTask as deleteTodo, 
          updateTask as updateTodo } from './TaskActions';
