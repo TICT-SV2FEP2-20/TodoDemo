@@ -11,9 +11,11 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@web/dev-server": "^0.1.28"
+    "@web/dev-server": "^0.1.28",
+    "@web/rollup-plugin-html": "^1.10.1"
   },
   "scripts": {
-    "start": "web-dev-server --node-resolve --watch --app-index src/index.html --open"
+    "start": "web-dev-server --node-resolve --watch --app-index src/index.html --open",
+    "build": "rollup -c --environment INCLUDE_DEPS,BUILD:development"
   }
 }
